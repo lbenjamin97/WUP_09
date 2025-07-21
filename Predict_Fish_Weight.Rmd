@@ -68,31 +68,35 @@ library(car)
 subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
 ```
 ### Best Two regressor model
-For Perch the best two regression models is height and width. The overall best is also height and width with an adjusted R square 
+For Perch the best two regression models is height and width. The overall best is also height and width with an adjusted R square  of
 ```{r}
 MODL2 <- lm(Weight~ .-Length2-Length3 ,data=Perch)
 summary.lm(MODL2)
 ```
 
 ## Pike
-
-
-
-
-### Best Models
-
-
-
-
-
-### Best Two regressor model
-The regression model is L1,L2,L3-H-W . The best two are Length- Length3.
-
-
 ```{r}
 PIKE3 <- lm(Weight~ .  ,data=Pike)
 summary.lm(PIKE3)
 ```
+
+```{r}
+PIKE4<- lm(Weight~ .  ,data=Pike)
+summary.lm(PIKE4)
+```
+
+### Best Models
+
+ The best two are Length- Length3.
+
+
+
+### Best Two regressor model
+The regression model is L1,L2,L3-H-W .For Perch the best two regression models is height and width. The overall best is also height and width with an adjusted R square  of 0.9794. The best two are L1 & L3.
+
+
+
+
 ## Roach
 
 ### Best Models
