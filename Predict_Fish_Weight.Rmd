@@ -56,7 +56,7 @@ Whitefish <- select(Whitefish, -Species)
 library(leaps)
 regsubsets.out <-
     regsubsets(Weight ~ .,
-               data = Roach,
+               data = Perch,
                nbest = 1,       # 1 best model for each number of predictors
                nvmax = NULL,    # NULL for no limit on number of variables
                force.in = NULL, force.out = NULL,
@@ -73,6 +73,25 @@ For Perch the best two regression models is height and width. The overall best i
 MODL2 <- lm(Weight~ .-Length2-Length3 ,data=Perch)
 summary.lm(MODL2)
 ```
+
+
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Pike,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
+```
+
+
 
 ## Pike
 ```{r}
@@ -96,8 +115,24 @@ The regression model is L1,L2,L3-H-W .For Perch the best two regression models i
 
 
 ## Roach
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Roach,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
+```
 
 ### Best Models
+The best models are Length3-Width.
 
 ### Best Two regressor model
 ```{r}
@@ -105,5 +140,9 @@ Roach64<- lm(Weight~ . -Height-Length1-Length2 ,data=Roach)
 summary.lm(Roach64)
 ```
 
-The best two models are Length3-Width, with an adjusted R squared of 
+The best two models are Length3-Width, with an adjusted R squared of 0.842.
+
 ## Final Summary Statements
+We learned how to make multiple regression models manually and automated.This showed us how to determine the best model & what models were done in order to achieve it as well.
+
+
