@@ -52,16 +52,47 @@ Whitefish <- select(Whitefish, -Species)
 ## Perch
 
 ### Best Models
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Pike,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
 
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
+```
 ### Best Two regressor model
-
+For Perch the best two regression models is height and width. The overall best is also height and width with an adjusted R square 
+```{r}
+MODL2 <- lm(Weight~ .-Length2-Length3 ,data=Perch)
+summary.lm(MODL2)
+```
 
 ## Pike
 
+
+
+
 ### Best Models
 
-### Best Two regressor model
 
+
+
+
+### Best Two regressor model
+The regression model is L1,L2,L3-H-W . The best two are Length- Length3.
+
+
+```{r}
+PIKE3 <- lm(Weight~ .  ,data=Pike)
+summary.lm(PIKE3)
+```
 ## Roach
 
 ### Best Models
